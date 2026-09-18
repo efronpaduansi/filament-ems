@@ -7,6 +7,9 @@ use App\Filament\Resources\LeaveTypeResource\RelationManagers;
 use App\Models\LeaveType;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Infolists\Components\Section;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -57,6 +60,7 @@ class LeaveTypeResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
@@ -64,6 +68,17 @@ class LeaveTypeResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ]);
+    }
+
+    public static function infolist(Infolist $infolist): Infolist
+    {
+        return $infolist
+            ->schema([
+                Section::make('Detail')->schema([
+                    TextEntry::make('leave_type_name')->label('Jenis Cuti'),
+                    TextEntry::make('description')->label('Deskripsi'),
+                ])
             ]);
     }
 

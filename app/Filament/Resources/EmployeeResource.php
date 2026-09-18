@@ -51,6 +51,10 @@ class EmployeeResource extends Resource
                     ->searchable()
                     ->preload()
                     ->live()
+                    ->afterStateUpdated(function (Forms\Set $set) { //Tambahkan ini agar jika pilihan pada form select dihapus, maka form select state & city juga ikut kehapus
+                        $set('state_id', null);
+                        $set('city_id', null);
+                    })
                     ->required(),
                 Forms\Components\Select::make('state_id')
 
@@ -62,6 +66,7 @@ class EmployeeResource extends Resource
                     ->searchable()
                     ->preload()
                     ->live()
+                    ->afterStateUpdated(fn (Forms\Set $set) => $set('city_id', null)) //Tambahkan ini agar jika value form select state dihapus, maka value form select city juga ikut kehapus.
                     ->required(),
                 Forms\Components\Select::make('city_id')
                     //Untuk mengambil data City yang state_id = yang dipilih di form select sates
@@ -70,6 +75,7 @@ class EmployeeResource extends Resource
                         ->pluck('name', 'id')
                     )
                     ->searchable()
+                    ->live()
                     ->preload()
                     ->required(),
                 Forms\Components\Select::make('department_id')
@@ -86,8 +92,12 @@ class EmployeeResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\DatePicker::make('date_of_birth')
+                    ->native(false)
+                    ->displayFormat('d/m/Y')
                     ->required(),
                 Forms\Components\DatePicker::make('date_hired')
+                    ->native(false)
+                    ->displayFormat('d/m/Y')
                     ->required(),
                 Forms\Components\TextInput::make('status')
                     ->required(),

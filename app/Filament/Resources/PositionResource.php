@@ -75,7 +75,11 @@ class PositionResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('Department')
+                    ->label('Filter by Divisi')
+                    ->relationship('department', 'name')
+                    ->searchable()
+                    ->preload()
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

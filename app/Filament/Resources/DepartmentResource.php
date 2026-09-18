@@ -61,7 +61,9 @@ class DepartmentResource extends Resource
                 //
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -73,7 +75,8 @@ class DepartmentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\PositionsRelationManager::class,
+            RelationManagers\EmployeesRelationManager::class,
         ];
     }
 
