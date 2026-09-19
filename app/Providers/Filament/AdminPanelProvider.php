@@ -36,7 +36,7 @@ class AdminPanelProvider extends PanelProvider
                 'warning' => Color::Orange,
             ])
             ->brandName('Frondev HRIS')
-//            ->brandLogo(asset('images/logo.jpg'))
+            ->brandLogo(asset('images/logo.jpg'))
             ->font('Poppins')
             //Mengatur urutan paret menu di sidebar
             ->navigationGroups([
