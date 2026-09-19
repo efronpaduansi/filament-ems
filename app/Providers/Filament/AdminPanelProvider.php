@@ -38,6 +38,11 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Frondev HRIS')
 //            ->brandLogo(asset('images/logo.jpg'))
             ->font('Poppins')
+            //Mengatur urutan paret menu di sidebar
+            ->navigationGroups([
+                'Manajemen SDM',
+                'Sistem Manajemen',
+            ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([

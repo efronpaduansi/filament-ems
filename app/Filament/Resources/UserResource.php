@@ -23,6 +23,26 @@ class UserResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
 
     protected static ?string $navigationLabel = 'Pengguna';
+    protected static ?string $recordTitleAttribute = 'name'; //Artinya, nama pengguna bisa dicari melalui form global search
+
+    //Memungkinkan pengguna mencari beberapa data dari form global search melalui beberapa kolom sekaligus.
+    public static  function getGloballySearchableAttributes(): array
+    {
+        return [
+            'name', 'email'
+        ];
+    }
+
+    //Menampilkan jumlah user di badge menu User
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
+    }
+
+    public static function getNavigationBadgeColor(): string|array|null
+    {
+        return 'primary';
+    }
 
     public static function form(Form $form): Form
     {
